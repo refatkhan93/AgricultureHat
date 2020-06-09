@@ -1,0 +1,230 @@
+﻿
+@{
+    ViewBag.Title = "BuySummery";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+@using AgricultureHat.Models
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+<style>
+    .uptable {
+        margin: 2em 29%;
+    }
+    .cvs {
+        
+    }
+    .gmap {
+        height: 30em;
+        width: 100%;
+    }
+</style>
+
+<div class="profile" style="margin: 10% 3%;">
+    <p class="lbl-login" style="color: #e8a998d9;">Crops Buying Summary</p>
+    <table class="uptable">
+        <tr>
+            <td><label for="category" class="lbl-reg">Category</label></td>
+            <td>
+                <select name="category" id="category" class="user-name">
+                    <option value="">Select Category</option>
+                    @foreach (Category c in ViewBag.Category)
+                    {
+                        <option value="@c.Id">@c.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+
+    </table>
+    <table class="table table-bordered table-striped table-hover" id="buy">
+        <thead>
+        <tr>
+            <th>Serial No</th>
+            <th>Farmer</th>
+            <th>Village</th>
+            <th>Ward No</th>
+            <th>District</th>
+            <th>Phone</th>
+            <th>NID</th>
+            <th>Crop</th>
+            <th>Bought Quantity</th>
+            <th>Paied Price</th>
+
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="margin: 2em;">
+            <canvas id="myChart" class="chartjs-render-monitor cvs"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="map" class="gmap">
+
+            </div>
+            <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+<script src="~/Scripts/Chart.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+           var BingMaps = ol.source.BingMaps;
+            var map;
+            map = new ol.Map({
+                target: 'map',
+                layers: [
+                  new ol.layer.Tile({
+                      /*source: new ol.source.OSM()*/
+                      source: new BingMaps({
+                          key: 'AtpKsHERwDH2gV0Q-luITAkzvBrzzxohNb_lAY8JdGSXuEZvY-QftptarkiZK1eE',
+                          imagerySet: 'AerialWithLabelsOnDemand'
+
+                      })
+                  })
+                ],
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([90.4125, 23.8103]),
+                    zoom: 7
+                })
+            });
+            var ctx = document.getElementById('myChart').getContext("2d");;
+
+            ctx.canvas.width = 600;
+            ctx.canvas.height = 300;
+            var myChart;
+
+
+            var table = $("#buy").DataTable();
+
+
+            $('#category').on('change', function() {
+                var categoryId = $('#category').val();
+
+                var json = { id: categoryId };
+                var i = 1;
+                table.clear().draw(false);
+                var CropName = new Array();
+                var priceData = new Array();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetSummary", "Admin")',
+                    contentType: 'application/json',
+                    data: JSON.stringify(json),
+                    success: function (response) {
+                        
+                        $.each(response, function (key, value) {
+                            console.log(value.Lat, value.Long);
+                            var layer = new ol.layer.Vector({
+                                source: new ol.source.Vector({
+                                    features: [
+                                        new ol.Feature({
+                                            geometry: new ol.geom.Point(ol.proj.fromLonLat([value.Long, value.Lat]))
+                                        })
+                                        /*new ol.Feature({
+                                            geometry: new ol.geom.Point(ol.proj.fromLonLat([4.35247, 60.84673]))
+                                        })*/
+                                    ]
+                                }),
+                                style: new ol.style.Style({
+                                    image: new ol.style.Icon({
+                                        anchor: [0.5, 46],
+                                        anchorXUnits: 'fraction',
+                                        anchorYUnits: 'pixel',
+                                        opacity: 0.75,
+                                        src: 'http://openlayers.org/en/latest/examples/data/icon.png'
+                                    })
+                                })
+                            });
+                            map.addLayer(layer);
+
+                            var price = value.Quantity * value.Price;
+                            var dd = '';
+                            CropName[i - 1] = dd.concat(value.Crop.toString(), ': ', value.Quantity.toString());
+                            console.log(CropName[i - 1]);
+
+                            priceData[i - 1] = price;
+                            table.row.add([
+                                i,
+                                value.farmer.Name,
+                                value.farmer.Village,
+                                value.farmer.WardNo,
+                                value.farmer.District,
+                                value.farmer.Phone,
+                                value.farmer.Nid,
+                                value.Crop,
+                                value.Quantity,
+                                price
+                            ]).draw(false);
+                            i = i + 1;
+                        });
+                        myChart = new Chart(ctx, {
+                            type: 'pie',
+                            height: 400,
+                            width: 800,
+                            data: {
+                                labels: CropName,
+                                datasets: [
+                                    {
+                                        data: priceData,
+                                        backgroundColor: ['red', 'green', 'blue', 'black', 'orange', 'purple', 'white', 'yellow']
+                                    }
+                                ]
+
+                            },
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: 'Crops Buying Data'
+                                },
+                                legend: {
+                                    display: true,
+                                    position: 'top',
+                                    text: 'Hello',
+                                    fontColor: 'balck'
+                                }
+
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+       
+        
+        
+        
+       
+        
+        
+        /*map.addOverlay(overlay);
+        map.on('singleclick', function (event) {
+            if (map.hasFeatureAtPixel(event.pixel) === true) {
+                var coordinate = event.coordinate;
+
+                content.innerHTML = '<b>Hello world!</b><br />I am a popup.';
+                overlay.setPosition(coordinate);
+            } else {
+                overlay.setPosition(undefined);
+                closer.blur();
+            }
+        });*/
+
+
+        
+    </script>
+
+}
+
+

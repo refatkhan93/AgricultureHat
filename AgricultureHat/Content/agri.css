@@ -1,0 +1,270 @@
+﻿@font-face { font-family: Neon; src: url('../fonts/Neon.ttf'); } 
+@font-face { font-family: Aquire; src: url('../fonts/Aquire.otf'); }
+@font-face { font-family: AquireBold; src: url('../fonts/AquireBold.otf'); }
+@font-face { font-family: AquireLight; src: url('../fonts/AquireLight.otf'); }
+@font-face { font-family: Beardbone; src: url('../fonts/Beardbone.ttf'); }
+
+.nav-btn {
+   box-shadow: 2px 2px 3px cadetblue;
+    padding: 10px;
+    width: 8em;
+}
+.nav-btn:hover {
+    box-shadow: 0px 4px 0px darkblue;
+}
+.icn {
+    margin-right: 5px;
+}
+.topbar {
+    background-color: #38d080c4;
+    padding: 3px;
+    
+}
+.textlogo {
+    padding-left: 129px;
+    font-size: 35px;
+    font-family: AquireBold;
+    font-weight: bolder;
+    text-shadow: 2px 3px 3px #5d1e5b;
+}
+.d-block {
+    height: 30em;
+    width: 100%;
+    box-shadow: 0px 0px 3px black;
+    padding: 15px;
+}
+.thumbnail {
+    width: 21em;
+    height: 20em;
+    box-shadow: #213a42 0px 0px 4px 1px;
+}
+.captionn {
+    display: block;
+    /* position: absolute; */
+    width: 100%;
+    right: 48%;
+    bottom: 58%;
+    left: 0%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* color: #ffffff; */
+    text-align: center;
+    
+}
+.title-body {
+    margin-top: 1em;
+    text-align: center;
+    margin-bottom: 1em;
+}
+.scr {
+    height: 101%;
+    padding: 10px 10px 10px 25px;
+    box-shadow: #213a42 0px 0px 4px 1px;
+}
+.search {
+    box-shadow: #66a25b 0px 0px 2px 2px;
+    border-radius: 4px;
+    margin-bottom: 40px;
+    padding: 10px;
+}
+.ovrchk {
+    margin-top: 20px;
+    padding: 5px;
+    height: 15em;
+    overflow: auto;
+}
+.left-side {
+    padding: 5px 1px 5px 1px;
+    box-shadow: #d0cdd4 0px 0 6px 1px;
+    border-radius: 0px 20px 0 20px;
+}
+.list-gp {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    text-decoration: none;
+}
+.list-gp:hover {
+    background-color: #f5f4ff;
+    text-decoration: none;
+}
+.scrchk {
+    margin-top: 20px;
+    padding: 6px;
+    margin-bottom: 20px;
+}
+.title {
+    color: black;
+   
+}
+.title:hover {
+     text-decoration: none;
+}
+.icnmar {
+    margin: 0 5px 0 20px;
+}
+.dvtable {
+    padding: 1em;
+}
+
+/*  Blood Controller */
+
+.createbtn {
+    width: 20em;
+    height: 3em;
+    padding: 10px;
+    font-size: 17px;
+    font-family: sans-serif;
+   /* background-color: #094a4c;*/
+}
+.top-para {
+    text-align: center;
+    margin: 15px;
+}
+.center-side { 
+    padding: 5px 1px 5px 1px;
+    box-shadow: #d0cdd4 0px 0 6px 1px;
+    border-radius: 0px 20px 0 20px;
+    margin-top: 3em;
+
+}
+.active {
+    background-color: #1e7731;
+    color: white;
+}
+.confirm {
+    color: #5447c7;
+    font-weight: 600;
+    font-size: 30px;
+    text-shadow: 2px 2px 2px #e9ff9f;
+    background-color: #4f965ab0;
+    text-align: center;
+    font-style: oblique;
+}
+.sellbtn {
+    box-shadow: 2px 2px 3px #3b3936; 
+    font-weight: 600;
+}
+.sellbtn:hover {
+    box-shadow: 2px 2px 3px #3b3936; 
+    font-weight: 600;
+    background-color: #0c0c0c91d;
+    color: white;
+}
+.login {
+    background-image: url('../Photos/farmer.jpg');
+   
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 10% 18%;
+    box-shadow: 6px 6px 10px 2px #dcb6ff;
+    border-radius: 20px;
+}
+.register {
+    background-image: url('../Photos/farming.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 10% 15%;
+    box-shadow: 6px 6px 10px 2px #dcb6ff;
+    border-radius: 20px;
+}
+.profile {
+    
+    margin: 10% 10%;
+    padding: 1%;
+    box-shadow: 6px 6px 10px 2px #dcb6ff;
+    border-radius: 20px;
+}
+.lbl-reg {
+    background-color: #e0a38ea1;
+    width: 11em;
+    font-weight: 900;
+    
+    padding: 8px;
+    border-radius: 8px;
+}
+.lbl-login {
+    padding: 36px 1em 0 1em;
+    text-align: center;
+    
+    text-shadow: 3px 4px 1px black;
+    font-size: 3em;
+    font-family: AquireBold;
+    color: #66db9d;
+    font-weight: 1000;
+}
+.cerror {
+    color: red;
+    font-style: oblique;
+    margin-left: 6em;
+    text-shadow: 1px 1px 1px black;
+    
+}
+.error {
+        color: red;
+    }
+.search-head {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 40px;
+    font-family: Neon;
+    color: #3b4440;
+    font-weight: bolder;
+    text-shadow: 3px 3px 3px #030d25;
+}
+.user-name {
+    width: 14em;
+    height: 39px;
+    align-content: center;
+    padding: 10px;
+    /*box-shadow: 0px 2px 0px 0px blue;*/
+    border-style: none;
+    border-radius: 5px;
+    margin-bottom: 6px;
+    background-color: #ffffffb3;
+}
+
+.user-name:hover  {
+    outline: none;
+    width: 16em;
+    height: 39px;
+    align-content: center;
+    padding: 10px;
+    box-shadow: 0px 3px 0px 0px #bd0cb3;
+    border-style: none;
+    border-radius: 5px;
+    margin-bottom: 6px;
+}
+.user-name:focus  {
+    outline: none;
+    width: 16em;
+    height: 39px;
+    align-content: center;
+    padding: 10px;
+    box-shadow: 0px 3px 0px 0px blue;
+    border-style: none;
+    border-radius: 5px;
+    margin-bottom: 6px;
+}
+.f-bak {
+    background-image: url('../Photos/crop.jpg');
+    width: 100%;
+    height: 30em;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.f-text {
+    text-align: center;
+    padding-top: 4em;
+    font-size: 35px;
+    font-family: Aquire;
+}
+.ftitle {
+    padding: 8px;
+    margin: 2em 0px 10px 0px;
+    border-left: 2px solid #1c6d0d;
+    
+}

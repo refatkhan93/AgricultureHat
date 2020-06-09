@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "SellCrops";
+}
+@using AgricultureHat.Models
+@model AgricultureHat.Models.Farmer
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<link href="~/Content/Login.css" rel="stylesheet" />
+<div class="register" style="background-image: url('../Photos/sell.jpg'); background-position-y: bottom; ">
+    <p class="lbl-login" style="color: #e8a998d9;">Sell Product</p>
+    @if (ViewBag.Error != null)
+{
+    <p class="confirm" style="color: green;" id="warningLabel">@ViewBag.Error</p>
+}
+    <form style="padding: 2em 5em 5em; margin-left: 5em;" id="sell" action="~/Primary/SellCrops" method="POST" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>
+                    <label class="lbl-reg" for="Category">Category</label>
+                </td>
+                <td>
+                    <select name="CategoryId" id="Category" class="user-name">
+                        <option value="">Select Category</option>
+                        @foreach (Category c in ViewBag.Category)
+                        {
+                            <option value="@c.Id">@c.Name</option>
+                        }
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="Crops">Crops</label></td>
+                <td>
+                    <select name="CropId" id="Crops" class="user-name">
+                        <option value="">Select Crops</option>
+                    </select>
+                </td>
+            </tr>
+           <tr>
+                <td><label class="lbl-reg" for="Quantity">Quantity</label></td>
+                <td>
+                    <input class="user-name" type="number" name="Quantity" id="Quantity" placeholder="Quantity in KG" required />
+                </td>
+            </tr>
+
+            <tr>
+                <td><label class="lbl-reg" for="Price">Price</label></td>
+                <td>
+                    <input class="user-name" type="number" name="Price" id="Price" placeholder="Price for 1KG" required />
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td></td>
+                <td><input class="btn animate-btn" style="background-color: #1ab74f85; width: 100%; margin: 10px 0; font-weight: 700;" type="submit" value="Sell Product" /></td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>
+@section scripts
+{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $('#Category').on('change', function () {
+                var Id = $('#Category').val();
+                $('#Crops').empty();
+                $('#Crops').append('<option value="">Select Crops</option>');
+                    var json = { id: Id };
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetCropsById", "Primary")',
+                        contentType: 'application/json',
+                        data: JSON.stringify(json),
+                        success: function (response) {
+                            $.each(response, function (key, value) {
+                                $('#Crops').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                            });
+                        }
+                    });
+                });
+
+
+
+
+
+
+            setTimeout(function () {
+                $("#warningLabel").hide(1000).empty();
+            }, 5000);
+
+
+            
+        });
+
+    </script>
+
+}

@@ -1,0 +1,234 @@
+﻿@using AgricultureHat.Models
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+
+<link href="~/Content/Login.css" rel="stylesheet" />
+
+    <div class="profile">
+        <p class="lbl-login" style="color: #e8a998d9;">Crops Listed For Sell</p>
+        <table class="table table-bordered table-striped table-hover" id="crops">
+            <thead>
+            <tr>
+                <th>Serial No</th>
+                <th>Category</th>
+                <th>Crops</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Sold</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                int i = 1;
+                foreach (SellCropView s in ViewBag.Crops)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@s.Category</td>
+                        <td>@s.Crop</td>
+                        <td>@s.Quantity</td>
+                        <td>@s.Price</td>
+                        <td>@s.SellCropAmount</td>
+                        <td><a href="~/Primary/Delete/@s.Id" onclick="return confirm('Are you sure you want to Delete?');">Delete</a></td>
+                    </tr>
+                }
+
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="profile">
+    <p class="lbl-login" style="color: #e8a998d9;">Edit Profile</p>
+    @if (ViewBag.Error != null && ViewBag.Error.Equals("Profile Changed Successfully"))
+    {
+        <p class="cerror" style="text-align: center; background-color: #bbecc2; padding: 9px; color: green" id="error">@ViewBag.Error</p>
+    }
+    else if (ViewBag.Error != null)
+    {
+        <p class="cerror" style="text-align: center; background-color: #ecbbbb; padding: 9px;" id="error">@ViewBag.Error</p>
+    }
+    <form style="padding: 2em 5em 5em; margin-left: 18%;" id="register" action="~/Primary/EditProfile" method="POST" enctype="multipart/form-data">
+        <table>
+
+            <tr>
+                <td>
+                    <label class="lbl-reg" for="Name">Farmer Name</label>
+                </td>
+                <td>
+                    <input type="hidden" name="Id" value="@ViewBag.Farmer.Id" />
+                    <input type="hidden" name="pastImage" value="@ViewBag.Farmer.Image" />
+                    <input class="user-name" type="text" name="Name" id="Name" value="@ViewBag.Farmer.Name" required />
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="Village">Village</label></td>
+                <td>
+                    <input class="user-name" type="text" name="Village" id="Village" value="@ViewBag.Farmer.Village" required />
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="ward">Ward No</label></td>
+                <td>
+                    <input class="user-name" type="number" name="WardNo" id="ward" value="@ViewBag.Farmer.WardNo" required />
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="District">District</label></td>
+                <td>
+                    <input class="user-name" type="text" name="District" id="District" placeholder="District" value="@ViewBag.Farmer.District" required />
+                </td>
+            </tr>
+
+            <tr>
+                <td><label class="lbl-reg" for="Age">Age</label></td>
+                <td>
+                    <input class="user-name" type="text" name="Age" id="Age" placeholder="Age" value="@ViewBag.Farmer.Age" required />
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="phone">Phone</label></td>
+                <td>
+                    <input class="user-name" type="text" name="Phone" id="phone" placeholder="Phone No" value="@ViewBag.Farmer.Phone" required />
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="Nid">NID</label></td>
+                <td>
+                    <input class="user-name" type="number" name="Nid" id="Nid" placeholder="NID No" value="@ViewBag.Farmer.Nid" required />
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="Image">Image</label></td>
+                <td>
+                    <input class="user-name" style="padding: 5px;" type="file" name="Image" id="Image" />
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="email">Email</label></td>
+                <td>
+                    <input class="user-name" type="text" name="Email" id="email" placeholder="Email Id" value="@ViewBag.Farmer.Email" required />
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="password">Password</label></td>
+                <td>
+                    <input class="user-name" type="password" name="Password" id="password" placeholder="Password" required />
+                </td>
+            </tr>
+            <tr>
+                <td><label class="lbl-reg" for="cpassword">Confirm Password</label></td>
+                <td>
+                    <input class="user-name" type="password" name="cpassword" id="cpassword" placeholder="Confirm Password" required />
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn animate-btn" style="background-color: #1ab74f85; width: 100%; margin: 10px 0; font-weight: 700;" type="submit" value="EDIT PROFILE" /></td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>
+@section scripts
+{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $('#crops').dataTable();
+            setTimeout(function () {
+                $("#error").hide(2000).empty();
+            }, 5000);
+
+
+            $("#register").validate({
+                rules: {
+                    Name: "required",
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    Village: {
+                        required: true
+
+                    },
+                    District: {
+                        required: true
+                    },
+                    WordNo: {
+                        required: true
+
+                    },
+                    Password: {
+                        required: true,
+                        minlength: 5
+                    },
+                    cpassword: {
+                        minlength: 5,
+                        equalTo: "#password"
+                    },
+                    Phone: {
+                        required: true,
+                        number: true
+                    },
+                    Age: {
+                        required: true,
+                        number: true
+                    },
+                    Nid: {
+                        required: true,
+                        number: true
+                    }
+                },
+                messages: {
+                    Name: "Please Enter Farmer Name",
+                    Email: {
+                        required: "Please Enter Farmer Email id",
+                        email: "Email id not correct"
+                    },
+                    Password: {
+                        required: "Please Enter Your Password",
+                        minlength: "Minimum length is 5"
+                    },
+                    cpassword: {
+                        minlength: "Minimum length is 5",
+                        equalTo: "Password not matched"
+                    },
+                    Village: {
+                        required: "Please Enter Farmer Name"
+
+                    },
+                    District: {
+                        required: "Please Enter Farmer Name"
+                    },
+                    WordNo: {
+                        required: "Please Enter Farmer Name"
+
+                    },
+                    Phone: {
+                        required: "Please Enter Farmer Phone No",
+                        number: "Number should not contain cahracter"
+                    },
+                    Age: {
+                        required: "Please Enter Farmer Age",
+                        number: "Number should not contain cahracter"
+                    },
+                    Nid: {
+                        required: "Please Enter Farmer NID",
+                        number: "Number should not contain cahracter"
+                    }
+                }
+            });
+        });
+
+    </script>
+
+}

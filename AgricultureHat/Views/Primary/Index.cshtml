@@ -1,0 +1,93 @@
+﻿@using System.Globalization
+@using System.Runtime.Remoting.Metadata.W3cXsd2001
+@using AgricultureHat.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    List<Crop> crops = ViewBag.Crop;
+    string[] stime = DateTimeFormatInfo.CurrentInfo.MonthNames;
+    DateTime dt = DateTime.Now;
+    int month = dt.Month;
+    
+}
+<link href="~/Content/ContactSection.css" rel="stylesheet" />
+<div>
+    <div style="margin: 0 16px;">
+        <div class="ftitle">
+            <h4 style="font-family: AquireBold;">Suggestions For Growing Crops in The Session Of @stime[month - 1]</h4>
+            There will be some text about suggestions.
+        </div>
+        @for (int i = 0; i < crops.Count; i = i + 3)
+        {
+            <div class="row" data-aos="zoom-out-right" data-aos-duration="1000">
+                @for (int j = i; j < i + 3 && j < crops.Count; j++)
+                {
+                    <div class="col-md-4 d-block">
+                        <img class="thumbnail" src="~/@crops[j].Image" />
+                        <div class="captionn">
+                            <h3>@crops[j].Name</h3>
+                            <h4>Session: @stime[crops[j].SessionStart - 1] - @stime[crops[j].SessionEnd - 1]</h4>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+
+    </div>
+    <div>
+        <section id="contact">
+            <div class="section-content">
+                <h1 class="section-header">Get in <span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> Touch with us</span></h1>
+                <h3>Tell us the problem you face in farming as well as your need</h3>
+            </div>
+            <div class="contact-section">
+                <div class="container ">
+                    <form>
+                        <div class="row" style="margin: 0 5em;">
+                            <div class="col-md-6 form-line">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername">Your name</label>
+                                    <input type="text" class="form-control" id="" placeholder=" Enter Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail">Email Address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail" placeholder=" Enter Email id">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telephone">Mobile No.</label>
+                                    <input type="tel" class="form-control" id="telephone" placeholder=" Enter 11-digit mobile no.">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="margin-left: 8em;">
+                                    <label for="description"> Message</label>
+                                    <textarea class="form-control" id="description" placeholder="Enter Your Message"></textarea>
+                                </div>
+                                <div>
+                                    <button style="margin-right: 6em;" type="button" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send Message</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div>
+        <a class="weatherwidget-io" href="https://forecast7.com/en/22d3691d78/chittagong/" data-label_1="CHATTOGRAM" data-label_2="WEATHER" data-theme="mountains">CHATTOGRAM WEATHER</a>
+        <script>
+            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+        </script>
+    </div>
+</div>
+
+        @section scripts{
+            <script>
+                AOS.init();
+                
+               
+        </script>
+}

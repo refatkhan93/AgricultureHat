@@ -1,0 +1,194 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MedicInfo</title>
+    <link href="~/Content/custom.css" rel="stylesheet"/>
+    <link href="~/Content/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/aos.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+   
+    <link href="~/Content/fontawesome.css" rel="stylesheet"/>
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="topbar">
+
+               
+    <nav class="navbar navbar-expand-sm  justify-content-end">
+        @*<a class="navbar-brand" href="#">Home</a>*@
+        
+        <a class="title navbar-brand textlogo" href="~/Primary/Index"><span class="fas fa-tractor animated bounceInLeft icn"></span>Agriculture Hat</a>
+        
+
+        @*<button class="btn btn-success ml-auto mr-1">Always Show</button>*@
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-grow-0 ml-auto mr-1" id="navbarSupportedContent">
+            <ul class="navbar-nav text-right">
+               
+               
+                   <li class="nav-item">
+                        <a class="btn nav-btn @ViewBag.Index" href="~/Primary/Index"><i class="fas fa-home icn"></i>Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn nav-btn @ViewBag.SellCrops" href="~/Primary/SellCrops"><i class="fas fa-truck icn"></i>Sell Crops</a>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="btn nav-btn @ViewBag.AboutUs" href="~/Primary/AboutUs"><i class="fas fa-exclamation-circle icn"></i>About Us</a>
+                    </li>
+                   
+                
+                @if (Session["FarmerId"] == null)
+                {
+                    <li class="nav-item">
+                        <a class="btn nav-btn @ViewBag.Login" href="~/Authentication/Login"><i class="fas fa-sign-in-alt icn"></i>Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn nav-btn @ViewBag.Register" href="~/Authentication/Register"><i class="fas fa-user-plus icn"></i>Register</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="btn nav-btn @ViewBag.Profile" href="~/Primary/Profile"><i class="fas fa-id-badge icn"></i>Profile</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="btn nav-btn" href="~/Authentication/Logout"><i class="fas fa-sign-in-alt icn"></i>Logout</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </nav>
+            
+        
+</div>
+   
+<div class="container body-content">
+    @RenderBody()
+   
+</div>
+    <footer class="page-footer font-small unique-color-dark" style=" background-color: #212529; color: white; margin-bottom: -20px; padding-top: 2em; ">
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left mt-5">
+
+            <!-- Grid row -->
+            <div class="row mt-3">
+
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                    <!-- Content -->
+                    <h6 class="text-uppercase font-weight-bold">Company name</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+                        consectetur
+                        adipisicing elit.
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">Products</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!">MDBootstrap</a>
+                    </p>
+                    <p>
+                        <a href="#!">MDWordPress</a>
+                    </p>
+                    <p>
+                        <a href="#!">BrandFlow</a>
+                    </p>
+                    <p>
+                        <a href="#!">Bootstrap Angular</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!">Your Account</a>
+                    </p>
+                    <p>
+                        <a href="#!">Become an Affiliate</a>
+                    </p>
+                    <p>
+                        <a href="#!">Shipping Rates</a>
+                    </p>
+                    <p>
+                        <a href="#!">Help</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <i class="fas fa-home mr-3"></i> New York, NY 10012, US
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope mr-3"></i> info@example.com
+                    </p>
+                    <p>
+                        <i class="fas fa-phone mr-3"></i> + 01 234 567 88
+                    </p>
+                    <p>
+                        <i class="fas fa-print mr-3"></i> + 01 234 567 89
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> Nishat #Fianl Project</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+
+    
+
+    
+
+</body>
+</html>@*
+<script src="~/Scripts/fontawesome/fontawesome.js"></script>*@
+<script src="~/Scripts/fontawesome/all.min.js"></script>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/aos.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+@RenderSection("scripts", required: false)

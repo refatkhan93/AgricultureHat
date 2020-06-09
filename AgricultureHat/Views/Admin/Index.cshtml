@@ -1,0 +1,104 @@
+﻿@using AgricultureHat.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+<style>
+    .uptable {
+       margin: 2em 29%;
+    }
+</style>
+
+<div class="profile">
+    <p class="lbl-login" style="color: #e8a998d9;">Crops Listed For Sell</p>
+    <table class="uptable">
+        <tr>
+            <td><label for="category" class="lbl-reg">Category</label></td>
+            <td>
+                <select name="category" id="category" class="user-name">
+                    <option value="">Select Category</option>
+                    @foreach (Category c in ViewBag.Category)
+                    {
+                        <option value="@c.Id">@c.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="crop" class="lbl-reg">Crops</label></td>
+            <td>
+                <select name="crop" id="crop" class="user-name">
+                    <option value="">Select Crops</option>
+
+                </select>
+            </td>
+        </tr>
+    </table>
+    <table class="table table-bordered table-striped table-hover" id="buy">
+        <thead>
+        <tr>
+            <th>Serial No</th>
+            <th>Farmer Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var table = $("#buy").DataTable();
+
+        $('#category').on('change', function () {
+            var Id = $('#category').val();
+            $('#crop').empty();
+            $('#crop').append('<option value="">Select Crops</option>');
+            var json = { id: Id };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCropsById", "Primary")',
+                contentType: 'application/json',
+                data: JSON.stringify(json),
+                success: function (response) {
+                    $.each(response, function (key, value) {
+                        $('#crop').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                    });
+                }
+            });
+        });
+            $('#crop').on('change', function () {
+                var categoryId = $('#category').val();
+                var cropId = $('#crop').val();
+                console.log(cropId);
+                var json = { categoryid: categoryId, cropid: cropId };
+                var i = 1;
+                table.clear().draw(false);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCrops", "Admin")',
+                    contentType: 'application/json',
+                    data: JSON.stringify(json),
+                    success: function (response) {
+                        $.each(response, function (key, value) {
+                            var da = '<a class="btn btn-success" href="Admin/BuyCrops/'+value.Id+'">Buy</a>';
+                            table.row.add([
+                                i,
+                                value.farmer.Name,
+                                value.Quantity,
+                                value.Price,
+                                da
+
+                            ]).draw(false);
+                            i = i + 1;
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

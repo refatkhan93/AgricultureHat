@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<link href="~/Content/Login.css" rel="stylesheet" />
+<div class="login">
+    <p class="lbl-login">
+        Login
+    </p>
+    @if (ViewBag.Error == "Error")
+    {
+        <p class="cerror" id="error">Login Failed: Check your login.</p>
+    }
+    
+      
+    
+    <form style="padding: 2em 5em 5em; margin-left: 1em;" action="~/Authentication/LoginUser" method="POST">
+        <table>
+            <tr>
+                <td></td>
+                <td>
+                    <input class="user-name" type="text" name="username" id="username" placeholder="Username" required/>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                @*<td><label for="password">Password </label></td>*@
+                <td>
+                    <input class="user-name" type="password" name="password" id="password" placeholder="Password" required/>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input class="btn animate-btn" style="width: 100%; margin: 10px 0; background-color: #8294848f; font-weight: 700;" type="submit" value="Login" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="~/Authentication/Register">Not Registerd? Register.</a></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+@section scripts{
+<script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $("#error").hide(1000).empty();
+            }, 5000);
+        });
+    </script>
+}

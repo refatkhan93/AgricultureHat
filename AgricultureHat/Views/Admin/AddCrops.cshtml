@@ -1,0 +1,128 @@
+﻿@using System.Globalization
+@using AgricultureHat.Models
+
+@{
+    ViewBag.Title = "AddCrops";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+    string[] stime = DateTimeFormatInfo.CurrentInfo.MonthNames;
+}
+
+<div class="profile" style="margin: 10% 3%;">
+    <p class="lbl-login" style="color: #e8a998d9;">Add New Category</p>
+
+    @if (ViewBag.ctm != null )
+    {
+        <p class="cerror" style="text-align: center; background-color: #bbecc2; padding: 9px; color: green; margin-left: 0;" id="error">@ViewBag.ctm</p>
+    }
+    <form style="padding: 2em 5em 5em; margin-left: 18%;" method="post" action="~/Admin/AddCategory">
+        <table class="uptable">
+            <tr>
+                <td><label for="category" class="lbl-reg">Category</label></td>
+                <td>
+                    <input class="user-name" type="text" name="Name" placeholder="Enter New Category"/>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input class="btn animate-btn" style="background-color: #1ab74f85; width: 100%; margin: 10px 0; font-weight: 700;" type="submit" value="Add Category" /></td>
+            </tr>
+        </table>
+    </form>
+    <hr/>
+    <p class="lbl-login" style="color: #e8a998d9;">Add New Crops</p>
+
+    @if (ViewBag.cm != null)
+    {
+        <p class="cerror" style="text-align: center; background-color: #bbecc2; padding: 9px; color: green; margin-left: 0;" id="error">@ViewBag.cm</p>
+    }
+    <form style="padding: 2em 5em 5em; margin-left: 18%;" method="post" action="~/Admin/AddNewCrops" enctype="multipart/form-data">
+        <table class="uptable">
+            <tr>
+                <td><label for="category" class="lbl-reg">Category</label></td>
+                <td>
+                    <select name="CategoryId" id="category" class="user-name" required="">
+                        <option value="">Select Category</option>
+                        @foreach (Category c in ViewBag.Category)
+                        {
+                            <option value="@c.Id">@c.Name</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Name" class="lbl-reg">Name</label></td>
+                <td>
+                    <input class="user-name" type="text" name="Name" id="Name" placeholder="Enter Crop Name" />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="image" class="lbl-reg">Image</label></td>
+                <td>
+                    <input class="user-name" style="padding: 5px;" type="file" name="Image" id="image" required="" />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="SessionStart" class="lbl-reg">Session Start</label></td>
+                <td>
+
+                    <select name="SessionStart" id="SessionStart" class="user-name" required="">
+                        <option value="">Select Month</option>
+                        @{
+                            int i = 1;
+                            foreach (string c in stime)
+                            {
+                                <option value="@i">@c</option>
+                                if (i == 12)
+                                {
+                                    break;
+                                } 
+                                i = i + 1;
+                            }
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="SessionEnd" class="lbl-reg">Session End</label></td>
+                <td>
+
+                    <select name="SessionEnd" id="SessionEnd" class="user-name" required="">
+                        <option value="">Select Month</option>
+                        @{
+                            int ii = 1;
+                            foreach (string c in stime)
+                            {
+
+                                <option value="@ii">@c</option>
+                                if (ii == 12)
+                                {
+                                    break;
+                                } 
+                                ii = ii + 1;
+                            }
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input class="btn animate-btn" style="background-color: #1ab74f85; width: 100%; margin: 10px 0; font-weight: 700;" type="submit" value="Add Crops" /></td>
+            </tr>
+        </table>
+    </form>
+    
+</div>
+@section scripts
+{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#error").hide(2000).empty();
+            }, 5000);
+        });
+        </script>
+
+        }
