@@ -124,7 +124,7 @@
                     success: function (response) {
                         
                         $.each(response, function (key, value) {
-                            console.log(value.Lat, value.Long);
+                            console.log("LAN ",value.Lat, value.Long);
                             var layer = new ol.layer.Vector({
                                 source: new ol.source.Vector({
                                     features: [

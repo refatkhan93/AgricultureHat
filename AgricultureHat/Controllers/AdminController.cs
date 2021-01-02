@@ -23,6 +23,13 @@ namespace AgricultureHat.Controllers
             return View();
         }
 
+        public ActionResult ShowMessages()
+        {
+            List<Messages> msg = new List<Messages>();
+            msg = db.Messageses.ToList();
+            ViewBag.M = msg;
+            return View();
+        }
         public JsonResult GetCrops(int categoryid,int cropid)
         {
             var data = from s in db.SellCrops
@@ -140,7 +147,7 @@ namespace AgricultureHat.Controllers
                 addresses.Country = "Bangladesh";
                 try
                 {
-                    var gls = new GoogleLocationService("AIzaSyBKZp9cuEthSeBVTg51R2VYdebIyPIQwv8");
+                    var gls = new GoogleLocationService("AIzaSyDOYXX8MgKThJttmAixhqVeZgfzlIOi8uA");
                     var latlong = gls.GetLatLongFromAddress(addresses);
                     st.Lat = latlong.Latitude;
                     st.Long = latlong.Longitude;

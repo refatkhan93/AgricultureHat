@@ -1,0 +1,44 @@
+﻿
+@using AgricultureHat.Models
+
+@{
+    ViewBag.Title = "ShowMessages";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div class="profile" style="margin: 10% 3%;">
+    <p class="lbl-login" style="color: #e8a998d9;">Messages</p>
+    <table class="table table-bordered table-striped table-hover" id="buy">
+        <thead>
+        <tr>
+            <th>Serial No</th>
+            <th>Name</th>
+            <th>Email Id</th>
+            <th>Mobile No</th>
+            <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            int i = 1;
+            foreach (Messages m in ViewBag.M)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@m.Name</td>
+                    <td>@m.Email</td>
+                    <td>@m.Mobile</td>
+                    <td>@m.Message</td>
+                </tr>
+                i++;
+            }
+        }
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    <script>
+        var table = $("#buy").DataTable();
+    </script>
+     
+}

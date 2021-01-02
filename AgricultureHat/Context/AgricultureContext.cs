@@ -14,6 +14,7 @@ namespace AgricultureHat.Context
         public DbSet<SellCrop> SellCrops { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<Messages> Messageses { get; set; }
 
     }
 }

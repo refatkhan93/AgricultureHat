@@ -28,7 +28,13 @@ namespace AgricultureHat.Controllers
             ViewBag.Crop = crops;
             return View();
         }
-       
+
+        public ActionResult Message(Messages msg)
+        {
+            db.Messageses.Add(msg);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         public ActionResult SellCrops()
         {
             ViewBag.SellCrops = "active";

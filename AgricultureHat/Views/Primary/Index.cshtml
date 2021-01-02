@@ -1,4 +1,6 @@
-﻿@using System.Globalization
+﻿@using System
+@using System.Collections.Generic
+@using System.Globalization
 @using System.Runtime.Remoting.Metadata.W3cXsd2001
 @using AgricultureHat.Models
 
@@ -16,7 +18,7 @@
     <div style="margin: 0 16px;">
         <div class="ftitle">
             <h4 style="font-family: AquireBold;">Suggestions For Growing Crops in The Session Of @stime[month - 1]</h4>
-            There will be some text about suggestions.
+            Suggestions are based on months of the best production of crops.
         </div>
         @for (int i = 0; i < crops.Count; i = i + 3)
         {
@@ -44,29 +46,31 @@
             </div>
             <div class="contact-section">
                 <div class="container ">
-                    <form>
+                    <form method="post" action="~/Primary/Message">
                         <div class="row" style="margin: 0 5em;">
                             <div class="col-md-6 form-line">
                                 <div class="form-group">
                                     <label for="exampleInputUsername">Your name</label>
-                                    <input type="text" class="form-control" id="" placeholder=" Enter Name">
+                                    <input type="text" class="form-control" id="exampleInputUsername" name="Name" placeholder=" Enter Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail">Email Address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail" placeholder=" Enter Email id">
+                                    <input type="email" class="form-control" id="exampleInputEmail" name="Email" placeholder=" Enter Email id">
                                 </div>
                                 <div class="form-group">
                                     <label for="telephone">Mobile No.</label>
-                                    <input type="tel" class="form-control" id="telephone" placeholder=" Enter 11-digit mobile no.">
+                                    <input type="tel" class="form-control" id="telephone" name="Mobile" placeholder=" Enter 11-digit mobile no.">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group" style="margin-left: 8em;">
                                     <label for="description"> Message</label>
-                                    <textarea class="form-control" id="description" placeholder="Enter Your Message"></textarea>
+                                    <textarea class="form-control" id="description" name="Message" placeholder="Enter Your Message"></textarea>
                                 </div>
                                 <div>
-                                    <button style="margin-right: 6em;" type="button" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send Message</button>
+                                    <input type="submit" style="margin-right: 6em;" class="btn btn-default submit"  value="Send Message">
+
+                                    
                                 </div>
 
                             </div>

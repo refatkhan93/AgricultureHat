@@ -1,5 +1,6 @@
 ﻿
 @{
+    ViewBag.Title = "BuyCrops";
     Layout = "~/Views/Shared/_Layout3.cshtml"; 
 }
 
@@ -7,9 +8,9 @@
 <div class="register" style="background-image: url('');">
     <p class="lbl-login" style="color: #e8a998d9;">Buy Crops</p>
     @if (ViewBag.Error != null)
-{
-    <p class="cerror" style="margin: 0;text-align: center; background-color: #bbecc2; padding: 9px; color: green" id="error">@ViewBag.Error</p>
-}
+    {
+        <p class="cerror" style="margin: 0; text-align: center; background-color: #bbecc2; padding: 9px; color: green" id="error">@ViewBag.Error</p>
+    }
     <form style="padding: 2em 5em 5em; margin-left: 5em;" id="register" action="~/Admin/BoughtCrops" method="POST">
         <table>
             <tr>
@@ -17,14 +18,14 @@
                     <label class="lbl-reg">Farmer Name</label>
                 </td>
                 <td>
-                    <label class="user-name" >@ViewBag.Crop.farmer.Name</label>
-                   </td>
+                    <label class="user-name">@ViewBag.Crop.farmer.Name</label>
+                </td>
             </tr>
             <tr>
-                <td><label class="lbl-reg" >Village</label></td>
+                <td><label class="lbl-reg">Village</label></td>
                 <td>
                     <label class="user-name">@ViewBag.Crop.farmer.Village</label>
-                
+
                 </td>
             </tr>
             <tr>
@@ -41,37 +42,37 @@
             </tr>
 
             <tr>
-                <td><label class="lbl-reg" >Age</label></td>
+                <td><label class="lbl-reg">Age</label></td>
                 <td>
                     <label class="user-name">@ViewBag.Crop.farmer.Age</label>
                 </td>
             </tr>
             <tr>
-                <td><label class="lbl-reg" >Phone</label></td>
+                <td><label class="lbl-reg">Phone</label></td>
                 <td>
                     <label class="user-name">@ViewBag.Crop.farmer.Phone</label>
                 </td>
             </tr>
             <tr>
-                <td><label class="lbl-reg" >NID</label></td>
+                <td><label class="lbl-reg">NID</label></td>
                 <td>
                     <label class="user-name">@ViewBag.Crop.farmer.Nid</label>
                 </td>
             </tr>
             <tr>
-                <td><label class="lbl-reg" >Crops</label></td>
+                <td><label class="lbl-reg">Crops</label></td>
                 <td>
                     <label class="user-name">@ViewBag.Name</label>
                 </td>
             </tr>
             <tr>
-                <td><label class="lbl-reg" >Quantity</label></td>
+                <td><label class="lbl-reg">Quantity</label></td>
                 <td>
                     <label class="user-name" id="quantity">@ViewBag.Crop.Quantity</label>
                 </td>
             </tr>
             <tr>
-                <td><label class="lbl-reg" >Price</label></td>
+                <td><label class="lbl-reg">Price</label></td>
                 <td>
                     <label class="user-name" id="unit">@ViewBag.Crop.Price</label>
                 </td>
@@ -89,11 +90,11 @@
                     <label class="user-name" id="buyingprice"></label>
                 </td>
             </tr>
-            
+
 
             <tr>
                 <td></td>
-                <td><input class="btn animate-btn" style="background-color: #1ab74f85; width: 100%; margin: 10px 0; font-weight: 700;" type="submit" value="BUY" /></td>
+                <td><input class="btn animate-btn" style="background-color: #1ab74f85; width: 100%; margin: 10px 0; font-weight: 700;" type="submit" value="BUY"/></td>
             </tr>
 
         </table>
